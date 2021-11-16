@@ -5,7 +5,7 @@ interface  IScan{
 }
 
 
-class Scanner  implements IScan {
+class NormalScanner  implements IScan {
 	
 	
 	function scan(){
@@ -39,11 +39,18 @@ class ScannerAdapter  implements IScan {
 		$this->quickScanner->quickScan();
 	}
 }
-
+// Without Adapter
+echo "Normal Scan:" ;
+/**
+ * @var NormalScanner
+ */
+$normalScanner =  new NormalScanner();
+$normalScanner->scan();
 
 // Now Our client can use the Adapter class to execute QuickScan by calling scan() function
 // Note #1 Adapter Pattern map 1to1
 // Note #2 Adapter pattern only interface two  classes without changing their behavior  e.g. quickScan should not Print
+echo "\n\nScan via Adapter:" ;
 /**
  * @var IScan
  */
