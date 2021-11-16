@@ -33,6 +33,23 @@ class Order implements IObservable
 {
 
     /**
+     * @var bool
+     */
+    public $customer_email = false;
+    public $placed_at = "-" ;
+    public $paid_at = "-";
+
+    /**
+     * Order constructor.
+     * @param String $email
+     */
+    public function __construct( $email)
+    {
+        $this->customer_email = $email;
+    }
+
+
+    /**
      * @var array
      */
     public $observers = [];
@@ -59,14 +76,17 @@ class Order implements IObservable
     }
 
 
-    /**
-     * @var bool
-     */
-    public $customer_email = false;
+
 
     public function setOrderStatusPaid()
     {
-        $this->customer_email = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), -8) . '@gmail.com';
+        $this->paid_at = date("Y-m-d H:i:s");
+        $this->notify();
+    }
+
+    public function setOrderStatusPlaced()
+    {
+        $this->placed_at = date("Y-m-d H:i:s");
         $this->notify();
     }
 
@@ -115,18 +135,20 @@ class OrderPlacedEmail implements IObserver
 
     public function sendEmail()
     {
-        echo "Order is placed ==> Email was sent to Customer {$this->order->getCustomerEmail()}\n";
+        echo "Order is placed ==> Email was sent to Customer {$this->order->getCustomerEmail()}
+        \n placed @: {$this->order->placed_at}  
+        \n paid @: {$this->order->paid_at} \n";
     }
 }
 
 
 /////////////////////////////////////////////////////////////////////////
-/// Example
+/// Example Code
 ///
 /**
  * @var Order
  */
-$order = new Order();
+$order = new Order( substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), -8) . '@gmail.com' );
 
 /**
  * #var OrderPlacedEmail
@@ -135,8 +157,8 @@ $aOrderPlacedEmail = new OrderPlacedEmail($order);
 $order->register($aOrderPlacedEmail);
 
 
-$order->setOrderStatusPaid();
-sleep(2);
+$order->setOrderStatusPlaced();
+sleep(5);
 $order->setOrderStatusPaid();
 
 // deregister $aOrderPlacedEmail  so NO email will be sent on next order update
