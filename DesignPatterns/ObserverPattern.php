@@ -1,5 +1,17 @@
 <?php
+/**
+ * Observer Pattern example
+ * includes
+ * Observer interface with its concrete class OrderPlacedEmail
+ * Observable interface with its concrete class Order
+ * Upon Order status change to paid the OrderPlacedEmail will be notified via update which in turn
+ * will do some action e.g. send an EMail to the customer to confirm that order is placed
+ */
 
+
+/**
+ * Interface IObservable
+ */
 interface IObservable
 {
     /**
@@ -13,10 +25,16 @@ interface IObservable
     function notify();
 }
 
+
+/**
+ * Class Order
+ */
 class Order implements IObservable
 {
 
-
+    /**
+     * @var array
+     */
     public $observers = [];
 
     /**
@@ -25,12 +43,12 @@ class Order implements IObservable
      */
     function register(IObserver $observer)
     {
-        $this->observers[] = $observer;
+        $this->observers[spl_object_hash($observer)] = $observer;
     }
 
     function deregister(IObserver $observer)
     {
-        //$this->observers[] =  $observer ;
+        unset( $this->observers[spl_object_hash($observer)])  ;
     }
 
     function notify()
@@ -51,11 +69,20 @@ class Order implements IObservable
         $this->customer_email = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), -8) . '@gmail.com';
         $this->notify();
     }
+
+    public function getCustomerEmail()
+    {
+        return $this->customer_email  ;
+    }
 }
 
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
-//---------------- IObserver ---------------------------------------------------------
+//---------------- Observer Code---------------------------------------------------------
+
+/**
+ * Interface IObserver
+ */
 interface IObserver
 {
     function update();
@@ -88,7 +115,7 @@ class OrderPlacedEmail implements IObserver
 
     public function sendEmail()
     {
-        echo "Order is placed ==> Email was sent to Customer {$this->order->customer_email}";
+        echo "Order is placed ==> Email was sent to Customer {$this->order->getCustomerEmail()}\n";
     }
 }
 
@@ -108,5 +135,10 @@ $aOrderPlacedEmail = new OrderPlacedEmail($order);
 $order->register($aOrderPlacedEmail);
 
 
-sleep(5);
+$order->setOrderStatusPaid();
+sleep(2);
+$order->setOrderStatusPaid();
+
+// deregister $aOrderPlacedEmail  so NO email will be sent on next order update
+$order->deregister($aOrderPlacedEmail);
 $order->setOrderStatusPaid();
