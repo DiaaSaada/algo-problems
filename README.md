@@ -11,4 +11,5 @@
 - [ ] Command Pattern
 - [ ] Decorator Pattern
 
-# Also Writing Unit testing for each one
+# Writing Unit testing for Design Pattern
+- [x] Adapter Pattern
