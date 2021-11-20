@@ -8,8 +8,9 @@ interface  IScan{
 class NormalScanner  implements IScan {
 	
 	
-	function scan(){
+	function scan() : string{
 		echo "SCAN";
+		return "SCAN" ;
 	}
 }
 
@@ -17,8 +18,9 @@ class NormalScanner  implements IScan {
 
 class QuickScanner {
 	
-	 function quickScan(){
+	 function quickScan() : string {
 		echo "QUICK SCAN";
+         return "QUICK SCAN" ;
 	}
 	
 }
@@ -36,7 +38,7 @@ class ScannerAdapter  implements IScan {
 	}
 	
 	function scan(){
-		$this->quickScanner->quickScan();
+		return $this->quickScanner->quickScan();
 	}
 }
 // Without Adapter

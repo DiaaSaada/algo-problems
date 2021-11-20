@@ -1,0 +1,20 @@
+{
+  "require": {
+    "php": "^7.2|^8.0",
+    "phpunit/phpunit": "^9.5"
+  },
+
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "autoload": {
+    "classmap": [
+      "DesignPatterns/"
+    ]
+  },
+  "require-dev": {
+
+  }
+}
