@@ -1,4 +1,4 @@
-# Show casing Design Patterns for PHP7
+# Show casing Design Patterns for PHP7.3+
 
 - [x] Adapter Pattern
 - [x] Factory Pattern
@@ -17,6 +17,18 @@
 - [x] Dependency Injection
 
 Using Container and Dependency Injection architecture
-this allow our app to depends on a DBAdapter interface instead of depending on Oracle Adapter directly.
-Plus deferring the Adapter initialisation to continer instead of writing Adapter in our app.
+this allows our app to depend on a DBAdapter interface instead of depending on Oracle Adapter directly.
+Plus deferring the Adapter initialisation to container instead of writing Adapter in our app.
  
+ 
+ # Unit testing
+ 1- add new folders if any to composer.json
+ 
+ 2- run 
+ > composer dump-autoload
+ 
+ 3- run for Linux
+ > ./vendor/bin/phpunit tests
+
+ or run for windows
+ > vendor\bin\phpunit tests 

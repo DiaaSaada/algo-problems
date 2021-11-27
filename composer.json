@@ -12,7 +12,8 @@
   "autoload": {
     "classmap": [
       "DesignPatterns/",
-      "DependencyInjection/"
+      "DependencyInjection/",
+      "LeetCodeProblems/"
     ]
   },
   "require-dev": {
