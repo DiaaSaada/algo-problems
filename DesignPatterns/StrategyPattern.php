@@ -1,5 +1,5 @@
 <?php
-
+namespace StrategyPattern;
 interface IEngine
 {
     function start();

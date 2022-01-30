@@ -36,8 +36,8 @@ class Order implements IObservable
      * @var bool
      */
     public $customer_email = false;
-    public $placed_at = "-" ;
-    public $paid_at = "-";
+    public string $placed_at = "-";
+    public string $paid_at = "-";
 
     /**
      * Order constructor.
@@ -52,7 +52,7 @@ class Order implements IObservable
     /**
      * @var array
      */
-    public $observers = [];
+    public array $observers = [];
 
     /**
      * @param IObserver $observer
@@ -114,7 +114,7 @@ class OrderPlacedEmail implements IObserver
     /**
      * @var Order
      */
-    private $order;
+    private Order $order;
 
 
     /**

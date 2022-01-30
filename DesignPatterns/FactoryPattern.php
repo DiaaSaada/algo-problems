@@ -53,7 +53,6 @@ class  CarFactory implements ICarFactory
 {
 
 
-
     public static function makeCar( $type ): ?Car
     {
         switch ($type ){
