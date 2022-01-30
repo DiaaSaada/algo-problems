@@ -51,8 +51,8 @@ class Mailer
 
 /**
  * Class SalesOrderPlacingFacade
- * this is the Facde class allowing our eCommerce platform to
- * simpley placing an order without knowing all logistic related classes
+ * this is the Facade class allowing our eCommerce platform to
+ * simply placing an order without knowing all logistic related classes
  */
 class SalesOrderPlacingFacade
 {
@@ -62,9 +62,9 @@ class SalesOrderPlacingFacade
             $stock = new StockManagement();
             $stock->updateStock($product, $qty);
 
-            $nottification =  new Notification();
-            $nottification->notifyCustomer();
-            $nottification->notifyVendor();
+            $notification =  new Notification();
+            $notification->notifyCustomer();
+            $notification->notifyVendor();
 
             return true ;
         }catch (Exception $e){

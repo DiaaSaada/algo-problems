@@ -1,8 +1,8 @@
 <?php
 /**
  * Factory pattern used to
- * 1- encapsulate the complexity of creating instances from different subs of a base class e.g. CAR -> EVCar, PertolCar
- * 2- encapsulate the logic  of which sub of a base class to create e.g. CAR -> EVCar, PertolCar
+ * 1- encapsulate the complexity of creating instances from different subs of a base class e.g. CAR -> EVCar, PetrolCar
+ * 2- encapsulate the logic  of which sub of a base class to create e.g. CAR -> EVCar, PetrolCar
  * Another example could be:
  * a factory to create DB instance Mysql or Oracle based on config file
  */
