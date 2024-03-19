@@ -1,13 +1,17 @@
-# Show casing Design Patterns for PHP7.3+
+# Show casing Design Patterns for PHP & JS
 
 - [x] Adapter Pattern
 - [x] Factory Pattern
 - [x] Observer Pattern
+- [x] Builder Pattern
 - [x] Strategy Pattern
 - [x] Adapter Pattern
+- [x] Proxy Pattern
+- [x] Prototype Pattern
+- [x] Facade Pattern
 - [ ] Decorator Pattern
 - [ ] Composite Pattern
-- [ ] Proxy Pattern
+
 - [ ] Command Pattern
 
 # Writing Unit testing for Design Pattern
