@@ -1,5 +1,4 @@
 .idea
 vendor
 ./**/node_modules
-WebSocket\node_modules
-WebSocket\node_modules\*
+/WebSocket/node_modules
