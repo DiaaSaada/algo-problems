@@ -36,3 +36,8 @@ Plus deferring the Adapter initialisation to container instead of writing Adapte
 
  or run for windows
  > vendor\bin\phpunit tests 
+
+
+
+ Sorting :
+ ![alt text](image.png)
