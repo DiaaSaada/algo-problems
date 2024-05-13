@@ -33,16 +33,9 @@ var matrixScore = function (grid) {
             }
         }
     }
-    let sum = 0
-    for (let r = 0; r < grid.length; r++) {
+    // read each row, convert to int and add to sum
 
-        let row = ""
-        for (let c = 0; c < grid[0].length; c++) {
-            row += grid[r][c];
-
-        }
-        sum += parseInt(row, 2);
-    }
+    const sum = grid.reduce((sum, row) => sum + parseInt(row.join(''), 2), 0);
 
     return sum;
 
