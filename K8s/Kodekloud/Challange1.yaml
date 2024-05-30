@@ -1,0 +1,106 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: development
+  name: developer-role
+rules:
+- apiGroups: ['']
+  resources: ['services']
+  verbs: ['*']
+- apiGroups: ['']
+  resources: ['persistentvolumeclaims']
+  verbs: ['*']
+- apiGroups: ['']
+  resources: ['pods']
+  verbs: ['*']
+
+create rolebinding = developer-rolebinding, role= 'developer-role', namespace = development
+rolebinding = developer-rolebinding associated with user = 'martin'
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-rolebinding
+  namespace: development
+subjects:
+# You can specify more than one 'subject'
+- kind: User
+  name: martin # 'name' is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  # 'roleRef' specifies the binding to a Role / ClusterRole
+  kind: Role #this must be Role or ClusterRole
+  name: developer-role # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io
+  
+  
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jekyll-site
+  namespace: development
+spec:
+  volumeName: 'jekyll-site'
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+      
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jekyll
+  namespace: development
+  labels:
+    run: jekyll
+spec:
+  containers:
+  - name: jekyll
+    image: kodekloud/jekyll-serve
+    volumeMounts:
+      - name: site
+        mountPath: /site
+  initContainers:
+  - name: copy-jekyll-site
+    image: kodekloud/jekyll
+    command: 
+    - jekyll
+    - new
+    - "/site"
+    volumeMounts:
+      - name: site
+        mountPath: "/site"
+  volumes:
+  - name: site
+    persistentVolumeClaim:
+      claimName: jekyll-site
+      
+      
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jekyll
+  namespace: development
+spec:
+  type: NodePort
+  selector:
+    run: jekyll
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 4000
+      nodePort: 30097
+# kubectl config set-context developer --cluster=kubernetes --user=martin
+# kubectl config use-context developer
+# kubectl config set-credentials martin --client-key=/root/martin.key --client-certificate=/root/martin.crt
+
+
+      
+
+
