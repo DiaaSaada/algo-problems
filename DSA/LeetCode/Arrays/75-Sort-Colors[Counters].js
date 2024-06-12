@@ -16,14 +16,13 @@ var sortColors = function (nums) {
     for (let i = 0; i < nums.length; i++) {
         counter[nums[i]] += 1
     }
-    for (let i = 0; i < counter['0']; i++) {
-        nums[i] = 0
-    }
-    for (let i = counter['0']; i < counter['0'] + counter['1']; i++) {
-        nums[i] = 1
-    }
-    for (let i = counter['0'] + counter['1']; i < nums.length; i++) {
-        nums[i] = 2
+    let index = 0;
+
+    for (let key in counter) {
+        let value = parseInt(key);
+        for (let i = 0; i < counter[key]; i++) {
+            nums[index++] = value;
+        }
     }
 
 };
