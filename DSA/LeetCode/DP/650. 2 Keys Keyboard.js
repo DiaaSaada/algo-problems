@@ -21,7 +21,7 @@ var minSteps = function (n) {
 
         return Math.min(
             dp(count + mem, mem, op + 1), //ctrl+V
-            dp(count * 2, a.length, op + 2),  //ctrl+C => ctrl+V
+            dp(count * 2, count, op + 2),  //ctrl+C => ctrl+V
         )
 
     }
