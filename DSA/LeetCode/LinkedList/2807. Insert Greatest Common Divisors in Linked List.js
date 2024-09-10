@@ -39,4 +39,6 @@ const gcd = function (a, b) {
 
     return gcdVal;
 }
-
+const gcd2 = function (a, b) {
+    return b ? gcd2(b, a % b) : a
+}
