@@ -9,8 +9,8 @@ var queryResults = function (limit, queries) {
     const colorFreqMap = new Map()
     let res = []
 
-    for (q of queries) {
-        const [index, color] = q
+    for ([index, color] of queries) {
+
 
         let oldColor = index2Color.get(index)
         let oldColorFreq = colorFreqMap.get(oldColor) ?? 0
@@ -34,7 +34,6 @@ var queryResults = function (limit, queries) {
         }
 
         res.push(colorFreqMap.size)
-
 
 
     }
