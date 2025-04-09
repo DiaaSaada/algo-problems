@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: dice
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 999
+  jobTemplate:
+    spec:
+      backoffLimit: 25
+      activeDeadlineSeconds: 20
+      template:
+        spec:
+          containers:
+          - name: throw-dice
+            image: kodekloud/throw-dice
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
